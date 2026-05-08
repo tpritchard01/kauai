@@ -70,18 +70,22 @@ const trips = {
     name: "Hawaii 2026 (from Australia)",
     flag: "🇦🇺",
     waypoints: [
-      { title: "Depart Melbourne (MEL)", time: "Fri May 23, 4:00 PM", icon: "✈️", lat: -37.6690, lng: 144.8410, note: "QF 462 · Airbus A321neo · Terminal 1 · 1h 30m" },
-      { title: "Arrive Sydney (SYD)", time: "Fri May 23, 5:30 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 462 · Terminal 3" },
-      { title: "Depart Sydney (SYD)", time: "Fri May 23, 8:15 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 103 · Airbus A330 · Terminal 1 · 9h 40m" },
-      { title: "Arrive Honolulu (HNL)", time: "Fri May 23, 9:55 AM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "QF 103 · Terminal 2 · Same day (crossed date line)" },
+      { title: "Depart Melbourne (MEL)", time: "Sat May 23, 4:00 PM", icon: "✈️", lat: -37.6690, lng: 144.8410, note: "QF 462 · Airbus A321neo · Terminal 1 · 1h 30m" },
+      { title: "Arrive Sydney (SYD)", time: "Sat May 23, 5:30 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 462 · Terminal 3" },
+      { title: "Depart Sydney (SYD)", time: "Sat May 23, 8:15 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 103 · Airbus A330 · Terminal 1 · 9h 40m" },
+      { title: "Arrive Honolulu (HNL)", time: "Sat May 23, 9:55 AM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "QF 103 · Terminal 2 · Same day (gained a day crossing date line)" },
       { title: "Depart Honolulu (HNL)", time: "Sat May 23, 1:23 PM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "AS 1073 · 0h 46m" },
-      { title: "Arrive Lihue, Kauai (LIH)", time: "Sat May 23, 2:09 PM", icon: "✈️", lat: 21.9770, lng: -159.3390, note: "AS 1073" },
+      { title: "Arrive Lihue, Kauai (LIH)", time: "Sat May 23, 2:09 PM", icon: "✈️", lat: 21.9770, lng: -159.3390, note: "AS 1073 · Picked up by Tim in rental SUV" },
+      { title: "Check-in: Hale Koa", time: "Sat May 23, 3:00 PM", icon: "🏠", lat: 21.8800, lng: -159.4530, note: "2598 Hoonani Rd, Koloa · Check-out Thu May 28, 11 AM" },
       { title: "Depart Lihue (LIH)", time: "Thu May 28, 12:55 PM", icon: "✈️", lat: 21.9770, lng: -159.3390, note: "AS 1074 · Boeing 717-200 · Hawaiian Main (O) · 0h 40m" },
       { title: "Arrive Honolulu (HNL)", time: "Thu May 28, 1:35 PM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "AS 1074 · Operated as Hawaiian Airlines" },
+      { title: "Rental Car Pickup (HNL Airport)", time: "Thu May 28, 2:00 PM", icon: "🚗", lat: 21.3245, lng: -157.9251, note: "300 Rodgers Blvd · One-way rental", secretKey: "hertz", secretLabel: "Hertz #" },
+      { title: "Check-in: The Twin Fin Hotel", time: "Thu May 28, 3:00 PM", icon: "🏠", lat: 21.2755, lng: -157.8235, note: "2570 Kalākaua Ave, Waikiki · Check-out Sat May 30, 11 AM" },
+      { title: "Rental Car Drop-off (Hyatt Waikiki)", time: "Fri May 29, 2:00 PM", icon: "🚗", lat: 21.2769, lng: -157.8234, note: "2424 Kalākaua Ave · Hyatt Regency Waikiki Beach", secretKey: "hertz", secretLabel: "Hertz #" },
       { title: "Depart Honolulu (HNL)", time: "Fri May 30, 11:50 AM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "QF 104 · Airbus A330 · Terminal 2 · 10h 40m" },
-      { title: "Arrive Sydney (SYD)", time: "Sat May 31, 6:30 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 104 · Terminal 1" },
-      { title: "Depart Sydney (SYD)", time: "Sat May 31, 8:40 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 493 · Boeing 737 · Terminal 3 · 1h 35m" },
-      { title: "Arrive Melbourne (MEL)", time: "Sat May 31, 10:15 PM", icon: "✈️", lat: -37.6690, lng: 144.8410, note: "QF 493 · Terminal 1 · Welcome home!" }
+      { title: "Arrive Sydney (SYD)", time: "Sun May 31, 6:30 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 104 · Terminal 1" },
+      { title: "Depart Sydney (SYD)", time: "Sun May 31, 8:40 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 493 · Boeing 737 · Terminal 3 · 1h 35m" },
+      { title: "Arrive Melbourne (MEL)", time: "Sun May 31, 10:15 PM", icon: "✈️", lat: -37.6690, lng: 144.8410, note: "QF 493 · Terminal 1 · Welcome home!" }
     ]
   }
 };

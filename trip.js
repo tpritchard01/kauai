@@ -82,7 +82,7 @@ const trips = {
       { title: "Rental Car Pickup (HNL Airport)", time: "Thu May 28, 2:00 PM", icon: "🚗", lat: 21.3245, lng: -157.9251, note: "300 Rodgers Blvd · One-way rental", secretKey: "hertz", secretLabel: "Hertz #" },
       { title: "Check-in: The Twin Fin Hotel", time: "Thu May 28, 3:00 PM", icon: "🏠", lat: 21.2755, lng: -157.8235, note: "2570 Kalākaua Ave, Waikiki · Check-out Sat May 30, 11 AM" },
       { title: "Rental Car Drop-off (Hyatt Waikiki)", time: "Fri May 29, 2:00 PM", icon: "🚗", lat: 21.2769, lng: -157.8234, note: "2424 Kalākaua Ave · Hyatt Regency Waikiki Beach", secretKey: "hertz", secretLabel: "Hertz #" },
-      { title: "Depart Honolulu (HNL)", time: "Fri May 30, 11:50 AM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "QF 104 · Airbus A330 · Terminal 2 · 10h 40m" },
+      { title: "Depart Honolulu (HNL)", time: "Sat May 30, 11:50 AM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "QF 104 · Airbus A330 · Terminal 2 · 10h 40m" },
       { title: "Arrive Sydney (SYD)", time: "Sun May 31, 6:30 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 104 · Terminal 1" },
       { title: "Depart Sydney (SYD)", time: "Sun May 31, 8:40 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 493 · Boeing 737 · Terminal 3 · 1h 35m" },
       { title: "Arrive Melbourne (MEL)", time: "Sun May 31, 10:15 PM", icon: "✈️", lat: -37.6690, lng: 144.8410, note: "QF 493 · Terminal 1 · Welcome home!" }

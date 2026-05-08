@@ -1,5 +1,4 @@
-// Trip: Hawaii 2026 (Kauai + Oahu)
-// Travelers: Timothy Pritchard, Kimberly Meekins
+// Hawaii 2026 — Multi-party trip visualizer
 
 // Encrypted confirmation numbers (unlock with password)
 const encryptedSecrets = {
@@ -33,7 +32,7 @@ async function unlockSecrets() {
     decryptedSecrets.hertz = await decrypt(encryptedSecrets.hertz, pwd);
     secretsUnlocked = true;
     document.getElementById('lock-btn').textContent = '🔓';
-    goTo(current); // refresh current view
+    goTo(current);
   } catch (e) {
     alert('Wrong password');
   }
@@ -45,165 +44,115 @@ function getNote(wp) {
   if (wp.secretKey) note += ' · ' + wp.secretLabel + decryptedSecrets[wp.secretKey];
   return note;
 }
-const trip = {
-  name: "Hawaii 2026",
-  waypoints: [
-    {
-      title: "Depart Seattle (SEA)",
-      time: "Fri May 22, 6:06 PM",
-      icon: "✈️",
-      lat: 47.4502,
-      lng: -122.3088,
-      note: "AS 237 · Boeing 737-800 · Main (N) · 6h 20m"
-    },
-    {
-      title: "Arrive Lihue, Kauai (LIH)",
-      time: "Fri May 22, 9:26 PM",
-      icon: "✈️",
-      lat: 21.9770,
-      lng: -159.3390,
-      note: "AS 237",
-      secretKey: "airline", secretLabel: "Conf: "
-    },
-    {
-      title: "Check-in: Kaua'i Palms Hotel",
-      time: "Fri May 22, ~9:30 PM",
-      icon: "🏠",
-      lat: 21.9750,
-      lng: -159.3560,
-      note: "2931 Kalena St, Lihue · Check-out Sat 11 AM",
-      secretKey: "expedia", secretLabel: "Expedia #"
-    },
-    {
-      title: "Car Rental Pickup (LIH Airport)",
-      time: "Sat May 23, 12:00 PM",
-      icon: "🚗",
-      lat: 21.9770,
-      lng: -159.3390,
-      note: "Chevy Tahoe · Automatic",
-      secretKey: "kauaiCar", secretLabel: "Booking #"
-    },
-    {
-      title: "Check-in: Hale Koa",
-      time: "Sat May 23, 3:00 PM",
-      icon: "🏠",
-      lat: 21.8800,
-      lng: -159.4530,
-      note: "2598 Hoonani Rd, Koloa · Check-out Thu May 28, 11 AM"
-    },
-    {
-      title: "Car Rental Return (LIH Airport)",
-      time: "Thu May 28, 12:00 PM",
-      icon: "🚗",
-      lat: 21.9770,
-      lng: -159.3390,
-      note: "Chevy Tahoe",
-      secretKey: "kauaiCar", secretLabel: "Booking #"
-    },
-    {
-      title: "Depart Lihue (LIH)",
-      time: "Thu May 28, 12:55 PM",
-      icon: "✈️",
-      lat: 21.9770,
-      lng: -159.3390,
-      note: "AS 1074 · Boeing 717-200 · Hawaiian Main (O) · 0h 40m"
-    },
-    {
-      title: "Arrive Honolulu (HNL)",
-      time: "Thu May 28, 1:35 PM",
-      icon: "✈️",
-      lat: 21.3245,
-      lng: -157.9251,
-      note: "AS 1074 · Operated as Hawaiian Airlines"
-    },
-    {
-      title: "Rental Car Pickup (HNL Airport)",
-      time: "Thu May 28, 2:00 PM",
-      icon: "🚗",
-      lat: 21.3245,
-      lng: -157.9251,
-      note: "300 Rodgers Blvd · One-way rental",
-      secretKey: "hertz", secretLabel: "Hertz #"
-    },
-    {
-      title: "Check-in: The Twin Fin Hotel",
-      time: "Thu May 28, 3:00 PM",
-      icon: "🏠",
-      lat: 21.2755,
-      lng: -157.8235,
-      note: "2570 Kalākaua Ave, Waikiki · Check-out Sat May 30, 11 AM"
-    },
-    {
-      title: "Rental Car Drop-off (Hyatt Waikiki)",
-      time: "Fri May 29, 2:00 PM",
-      icon: "🚗",
-      lat: 21.2769,
-      lng: -157.8234,
-      note: "2424 Kalākaua Ave · Hyatt Regency Waikiki Beach",
-      secretKey: "hertz", secretLabel: "Hertz #"
-    },
-    {
-      title: "Depart Honolulu (HNL)",
-      time: "Sat May 30, 3:02 PM",
-      icon: "✈️",
-      lat: 21.3245,
-      lng: -157.9251,
-      note: "AS 267 · Boeing 737 MAX 9 · Main (L) · 5h 57m"
-    },
-    {
-      title: "Arrive Seattle (SEA)",
-      time: "Sat May 30, 11:59 PM",
-      icon: "✈️",
-      lat: 47.4502,
-      lng: -122.3088,
-      note: "AS 267 · Welcome home!"
-    }
-  ]
+
+// === TRIP DATA ===
+const trips = {
+  us: {
+    name: "Hawaii 2026 (from Seattle)",
+    flag: "🇺🇸",
+    waypoints: [
+      { title: "Depart Seattle (SEA)", time: "Fri May 22, 6:06 PM", icon: "✈️", lat: 47.4502, lng: -122.3088, note: "AS 237 · Boeing 737-800 · Main (N) · 6h 20m" },
+      { title: "Arrive Lihue, Kauai (LIH)", time: "Fri May 22, 9:26 PM", icon: "✈️", lat: 21.9770, lng: -159.3390, note: "AS 237", secretKey: "airline", secretLabel: "Conf: " },
+      { title: "Check-in: Kaua'i Palms Hotel", time: "Fri May 22, ~9:30 PM", icon: "🏠", lat: 21.9750, lng: -159.3560, note: "2931 Kalena St, Lihue · Check-out Sat 11 AM", secretKey: "expedia", secretLabel: "Expedia #" },
+      { title: "Car Rental Pickup (LIH Airport)", time: "Sat May 23, 12:00 PM", icon: "🚗", lat: 21.9770, lng: -159.3390, note: "Chevy Tahoe · Automatic", secretKey: "kauaiCar", secretLabel: "Booking #" },
+      { title: "Check-in: Hale Koa", time: "Sat May 23, 3:00 PM", icon: "🏠", lat: 21.8800, lng: -159.4530, note: "2598 Hoonani Rd, Koloa · Check-out Thu May 28, 11 AM" },
+      { title: "Car Rental Return (LIH Airport)", time: "Thu May 28, 12:00 PM", icon: "🚗", lat: 21.9770, lng: -159.3390, note: "Chevy Tahoe", secretKey: "kauaiCar", secretLabel: "Booking #" },
+      { title: "Depart Lihue (LIH)", time: "Thu May 28, 12:55 PM", icon: "✈️", lat: 21.9770, lng: -159.3390, note: "AS 1074 · Boeing 717-200 · Hawaiian Main (O) · 0h 40m" },
+      { title: "Arrive Honolulu (HNL)", time: "Thu May 28, 1:35 PM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "AS 1074 · Operated as Hawaiian Airlines" },
+      { title: "Rental Car Pickup (HNL Airport)", time: "Thu May 28, 2:00 PM", icon: "🚗", lat: 21.3245, lng: -157.9251, note: "300 Rodgers Blvd · One-way rental", secretKey: "hertz", secretLabel: "Hertz #" },
+      { title: "Check-in: The Twin Fin Hotel", time: "Thu May 28, 3:00 PM", icon: "🏠", lat: 21.2755, lng: -157.8235, note: "2570 Kalākaua Ave, Waikiki · Check-out Sat May 30, 11 AM" },
+      { title: "Rental Car Drop-off (Hyatt Waikiki)", time: "Fri May 29, 2:00 PM", icon: "🚗", lat: 21.2769, lng: -157.8234, note: "2424 Kalākaua Ave · Hyatt Regency Waikiki Beach", secretKey: "hertz", secretLabel: "Hertz #" },
+      { title: "Depart Honolulu (HNL)", time: "Sat May 30, 3:02 PM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "AS 267 · Boeing 737 MAX 9 · Main (L) · 5h 57m" },
+      { title: "Arrive Seattle (SEA)", time: "Sat May 30, 11:59 PM", icon: "✈️", lat: 47.4502, lng: -122.3088, note: "AS 267 · Welcome home!" }
+    ]
+  },
+  au: {
+    name: "Hawaii 2026 (from Australia)",
+    flag: "🇦🇺",
+    waypoints: [
+      { title: "Depart Melbourne (MEL)", time: "Fri May 23, 4:00 PM", icon: "✈️", lat: -37.6690, lng: 144.8410, note: "QF 462 · Airbus A321neo · Terminal 1 · 1h 30m" },
+      { title: "Arrive Sydney (SYD)", time: "Fri May 23, 5:30 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 462 · Terminal 3" },
+      { title: "Depart Sydney (SYD)", time: "Fri May 23, 8:15 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 103 · Airbus A330 · Terminal 1 · 9h 40m" },
+      { title: "Arrive Honolulu (HNL)", time: "Fri May 23, 9:55 AM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "QF 103 · Terminal 2 · Same day (crossed date line)" },
+      { title: "Depart Honolulu (HNL)", time: "Sat May 23, 1:23 PM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "AS 1073 · 0h 46m" },
+      { title: "Arrive Lihue, Kauai (LIH)", time: "Sat May 23, 2:09 PM", icon: "✈️", lat: 21.9770, lng: -159.3390, note: "AS 1073" },
+      { title: "Depart Lihue (LIH)", time: "Thu May 28, 12:55 PM", icon: "✈️", lat: 21.9770, lng: -159.3390, note: "AS 1074 · Boeing 717-200 · Hawaiian Main (O) · 0h 40m" },
+      { title: "Arrive Honolulu (HNL)", time: "Thu May 28, 1:35 PM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "AS 1074 · Operated as Hawaiian Airlines" },
+      { title: "Depart Honolulu (HNL)", time: "Fri May 30, 11:50 AM", icon: "✈️", lat: 21.3245, lng: -157.9251, note: "QF 104 · Airbus A330 · Terminal 2 · 10h 40m" },
+      { title: "Arrive Sydney (SYD)", time: "Sat May 31, 6:30 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 104 · Terminal 1" },
+      { title: "Depart Sydney (SYD)", time: "Sat May 31, 8:40 PM", icon: "✈️", lat: -33.9461, lng: 151.1772, note: "QF 493 · Boeing 737 · Terminal 3 · 1h 35m" },
+      { title: "Arrive Melbourne (MEL)", time: "Sat May 31, 10:15 PM", icon: "✈️", lat: -37.6690, lng: 144.8410, note: "QF 493 · Terminal 1 · Welcome home!" }
+    ]
+  }
 };
 
-// Init map
-const map = L.map('map', { zoomControl: false }).setView([trip.waypoints[0].lat, trip.waypoints[0].lng], 13);
+// === MAP & UI ===
+let activeTrip = 'us';
+let markers = [];
+let routeLine = null;
+let current = 0;
+
+const map = L.map('map', { zoomControl: false }).setView([21.9770, -159.3390], 10);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap'
 }).addTo(map);
 L.control.zoom({ position: 'topright' }).addTo(map);
 
-// Add markers
-const markers = trip.waypoints.map((wp, i) => {
-  const marker = L.marker([wp.lat, wp.lng], {
-    icon: L.divIcon({
-      className: 'custom-marker',
-      html: `<div style="font-size:20px;text-align:center;width:30px;height:30px;line-height:30px;background:#fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)">${wp.icon}</div>`,
-      iconSize: [30, 30], iconAnchor: [15, 15]
-    })
+function loadTrip(key) {
+  activeTrip = key;
+  const trip = trips[key];
+  current = 0;
+
+  // Clear existing
+  markers.forEach(m => map.removeLayer(m));
+  markers = [];
+  if (routeLine) map.removeLayer(routeLine);
+
+  // Add markers
+  markers = trip.waypoints.map((wp, i) => {
+    const marker = L.marker([wp.lat, wp.lng], {
+      icon: L.divIcon({
+        className: 'custom-marker',
+        html: `<div style="font-size:20px;text-align:center;width:30px;height:30px;line-height:30px;background:#fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)">${wp.icon}</div>`,
+        iconSize: [30, 30], iconAnchor: [15, 15]
+      })
+    }).addTo(map);
+    marker.on('click', () => goTo(i));
+    return marker;
+  });
+
+  // Draw route
+  routeLine = L.polyline(trip.waypoints.map(wp => [wp.lat, wp.lng]), {
+    color: '#2196F3', weight: 3, opacity: 0.6, dashArray: '8,8'
   }).addTo(map);
-  marker.on('click', () => goTo(i));
-  return marker;
-});
 
-// Draw route line
-const routeLine = L.polyline(trip.waypoints.map(wp => [wp.lat, wp.lng]), {
-  color: '#2196F3', weight: 3, opacity: 0.6, dashArray: '8,8'
-}).addTo(map);
+  // Update slider
+  const slider = document.getElementById('slider');
+  slider.max = trip.waypoints.length - 1;
+  slider.value = 0;
 
-// Slider setup
-const slider = document.getElementById('slider');
-const waypointsEl = document.getElementById('waypoints');
-slider.max = trip.waypoints.length - 1;
+  // Update dots
+  const waypointsEl = document.getElementById('waypoints');
+  waypointsEl.innerHTML = '';
+  trip.waypoints.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.onclick = () => goTo(i);
+    waypointsEl.appendChild(dot);
+  });
 
-// Render dots
-trip.waypoints.forEach((_, i) => {
-  const dot = document.createElement('div');
-  dot.className = 'dot';
-  dot.onclick = () => goTo(i);
-  waypointsEl.appendChild(dot);
-});
+  // Update flag buttons
+  document.querySelectorAll('.flag-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.trip === key);
+  });
 
-// Navigation
-let current = 0;
+  goTo(0);
+}
+
 function goTo(idx) {
+  const trip = trips[activeTrip];
   current = idx;
-  slider.value = idx;
+  document.getElementById('slider').value = idx;
   const wp = trip.waypoints[idx];
 
   document.querySelector('#event-info .icon').textContent = wp.icon;
@@ -216,8 +165,12 @@ function goTo(idx) {
   markers[idx].bindPopup(`<b>${wp.title}</b><br>${wp.time}<br><em>${getNote(wp)}</em>`).openPopup();
 }
 
-slider.addEventListener('input', e => goTo(parseInt(e.target.value)));
+document.getElementById('slider').addEventListener('input', e => goTo(parseInt(e.target.value)));
 document.getElementById('prev').onclick = () => goTo(Math.max(0, current - 1));
-document.getElementById('next').onclick = () => goTo(Math.min(trip.waypoints.length - 1, current + 1));
+document.getElementById('next').onclick = () => goTo(Math.min(trips[activeTrip].waypoints.length - 1, current + 1));
 
-goTo(0);
+// Init — wait for origin selection
+function selectOrigin(key) {
+  document.getElementById('origin-modal').style.display = 'none';
+  loadTrip(key);
+}
